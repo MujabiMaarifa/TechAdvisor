@@ -1,12 +1,8 @@
-import os
-import streamlit as st
 from pyswip import Prolog
+import streamlit as st
 
-# -------------------------
-# PROLOG SETUP
-# -------------------------
-prolog = Prolog()
-prolog.consult("main.pl")
+prolog = None
+#prolog.consult("main.pl")
 
 # -------------------------
 # PAGE CONFIG
@@ -88,7 +84,16 @@ def extract_symptoms(text):
 # DIAGNOSIS BUTTON
 # -------------------------
 st.markdown("###")
+
 if st.button("🚀 Diagnose Issue", use_container_width=True):
+    
+    try:
+        from pyswip import Prolog
+        prolog = Prolog()
+        prolog.consult("main.pl")
+    except Exception:
+        st.error("Prolog not found cannot detect prolog on streamlit cloud")
+        st.stop()
 
     # Clear previous facts
     list(prolog.query("retractall(has_symptom(_))"))
