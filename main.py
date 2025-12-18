@@ -1,8 +1,6 @@
-from pyswip import Prolog
 import streamlit as st
 
 prolog = None
-#prolog.consult("main.pl")
 
 # -------------------------
 # PAGE CONFIG
