@@ -83,8 +83,7 @@ def extract_symptoms(text):
 # -------------------------
 st.markdown("###")
 
-if st.button("🚀 Diagnose Issue", use_container_width=True):
-    
+if st.button("🚀 Diagnose Issue", use_container_width=True):    
     try:
         from pyswip import Prolog
         prolog = Prolog()

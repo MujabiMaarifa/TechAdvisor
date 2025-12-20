@@ -160,11 +160,17 @@ if st.button("🚀 Diagnose Issue", use_container_width=True):
                 "Problem": prob.replace("_", " ").title(),
                 "Confidence": int(conf * 100),
                 "Solution": sol
-            })
+                })
 
         # highest confidence (safe single query)
-        best = list(prolog.query("select_highest_confidence(P,C)"))[0]
-        best_problem = best["P"].replace("_", " ").title()
+        best_query = list(prolog.query("select_highest_confidence(P,C)"))
+        if best_query:
+            best = best_query[0]
+            best_problem = best["P"].replace("_", " ").title()
+            best_conf = int(best["C"] * 100)
+        else:
+            best_problem = None
+            best_conf = None
 
     # =====================================================
     # DISPLAY RESULTS
